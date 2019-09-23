@@ -1,0 +1,7 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<svg x="0px" y="0px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 32 32" xml:space="preserve" id="Layer_1">
+  <g id="Clear">
+    <path d="M18.1,23.1l-4.4,4.4c-0.7,0.7-1.9,0.7-2.6,0l-6.6-6.6c-0.7-0.7-0.7-1.9,0-2.6l4.4-4.4L18.1,23.1z" fill="#1177D7" class="Blue" />
+    <path d="M27.5,13.7l-8,8l-9.2-9.2l8-8c0.7-0.7,1.9-0.7,2.6,0l6.6,6.6C28.2,11.8,28.2,13,27.5,13.7z" fill="#D11C1C" class="Red" />
+  </g>
+</svg>
