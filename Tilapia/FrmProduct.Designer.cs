@@ -593,6 +593,7 @@
             this.Name = "FrmProduct";
             this.Text = "FrmProduct";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmProduct_FormClosing);
             this.Load += new System.EventHandler(this.FrmProduct_Load);
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);

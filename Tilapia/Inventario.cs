@@ -152,15 +152,13 @@ namespace Tilapia
                     var d = Conexion.GDatos.TraerValorEscalarSql("select Cod_Bodega from TblBodega where idProducto=" + inv.idProd);
                     // captura la entrada del producto a la bodega 
                     inv.fecha_entrada = DateTime.Now.ToString("d");
-                    inv.Cant_Entrada = Convert.ToInt32(gridView1.GetRowCellValue(yrow, "Entrada").ToString());
-                    inv.id_entrada = Convert.ToInt32(Conexion.GDatos.TraerValorEscalar("InsertarEntrada", inv.fecha_entrada, inv.Cant_Entrada));
-
+                    inv.Cant_Entrada = Convert.ToInt32(gridView1.GetRowCellValue(yrow, "Entrada").ToString());;
+                    inv.exist = Convert.ToInt32(gridView1.GetRowCellValue(yrow, "Entrada").ToString()); ;
                     //detalles bodega 
 
                     inv.produccion = gridView1.GetRowCellValue(yrow, "Produccion").ToString();
                     inv.vencimiento = gridView1.GetRowCellValue(yrow, "Vencimiento").ToString();
-                    inv.exist = Convert.ToInt32(gridView1.GetRowCellValue(yrow, "Entrada"));
-                    Conexion.GDatos.Ejecutar("InsertarDetalle", d, inv.produccion, inv.vencimiento, inv.exist, inv.id_entrada);
+                    Conexion.GDatos.Ejecutar("InsertarDetalleBodega", d, inv.produccion, inv.vencimiento, inv.fecha_entrada, inv.Cant_Entrada,inv.exist);
 
 
                 }
@@ -172,14 +170,13 @@ namespace Tilapia
                     // captura la entrada del producto a la bodega 
                     inv.fecha_entrada = DateTime.Now.ToString("d");
                     inv.Cant_Entrada = Convert.ToInt32(gridView1.GetRowCellValue(yrow, "Entrada").ToString());
-                    inv.id_entrada = Convert.ToInt32(Conexion.GDatos.TraerValorEscalar("InsertarEntrada", inv.fecha_entrada, inv.Cant_Entrada));
+                    inv.exist = Convert.ToInt32(gridView1.GetRowCellValue(yrow, "Entrada").ToString());
 
                     //detalles bodega 
 
                     inv.produccion = gridView1.GetRowCellValue(yrow, "Produccion").ToString();
                     inv.vencimiento = gridView1.GetRowCellValue(yrow, "Vencimiento").ToString();
-                    inv.exist = Convert.ToInt32(gridView1.GetRowCellValue(yrow, "Entrada"));
-                    Conexion.GDatos.Ejecutar("InsertarDetalle", inv.idBodga, inv.produccion, inv.vencimiento, inv.exist, inv.id_entrada);
+                    Conexion.GDatos.Ejecutar("InsertarDetalleBodega", inv.idBodga, inv.produccion, inv.vencimiento, inv.fecha_entrada, inv.Cant_Entrada,inv.exist);
                 }
 
 

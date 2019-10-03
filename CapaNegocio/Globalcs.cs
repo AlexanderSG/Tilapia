@@ -7,6 +7,8 @@ namespace CapaNegocio
 {
    public class Globalcs
     {
-        public int idventa { get; set; }
+        // creamos el delegado
+
+       
     }
 }

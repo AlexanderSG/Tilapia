@@ -36,13 +36,18 @@ namespace Capanegocio.Orm
 
             return Conexion.GDatos.TraerDataTable("MostrarCliente");
         }
-       
-       
-        
-       // public DataTable Buscar()
-       // {
-//return Conexion.GDatos.TraerDataTableSql("mostrarClienteXNombre");
-       // }
+
+        public static void Cargar()
+        {
+
+             Conexion.GDatos.TraerDataTable("MostrarCliente");
+        }
+
+
+        // public DataTable Buscar()
+        // {
+        //return Conexion.GDatos.TraerDataTableSql("mostrarClienteXNombre");
+        // }
 
 
 

@@ -20,7 +20,11 @@ namespace Tilapia
         {
             InitializeComponent();
             LlenaGridVacia();
-            gridControl1.DataSource = Conexion.GDatos.TraerDataTable("mostrarProductoXExist");
+            DataTable mostrarProductoXExist = Conexion.GDatos.TraerDataTable("mostrarProductoXExist");
+            if (mostrarProductoXExist.Rows.Count != 0)
+            {
+                gridControl1.DataSource = mostrarProductoXExist;
+            }
         }
 
         private void navBarControl1_Click(object sender, EventArgs e)
@@ -47,7 +51,9 @@ namespace Tilapia
         {
             Inventario frm = new Inventario();
             frm.ShowDialog();
-            gridControl1.DataSource = Conexion.GDatos.TraerDataTable("mostrarProductoXExist");
+           gridControl1.DataSource = Conexion.GDatos.TraerDataTable("mostrarProductoXExist"); 
+	        
+           
         }
 
         private void gridControl1_Click(object sender, EventArgs e)
@@ -69,26 +75,29 @@ namespace Tilapia
         private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
             // codigo que hace un coloreo a las filas de la grilla dependiendo de su existencia
-
-            GridView view = sender as GridView;
-
-            int exist = Convert.ToInt32(view.GetRowCellDisplayText(e.RowHandle, view.Columns["Almacen"]));
-            int verificar = Convert.ToInt32(Conexion.GDatos.TraerValorEscalar("VerificarExMin", view.GetRowCellDisplayText(e.RowHandle, view.Columns["Codigo"])));
-
-            if (exist == 0)
+            if (gridView1.SelectedRowsCount!=0)
             {
-                e.Appearance.BackColor = Color.FromArgb(80, Color.LightSalmon);
+                GridView view = sender as GridView;
 
-            }
-            else if (exist <= verificar)
-            {
-                e.Appearance.BackColor = Color.FromArgb(80, Color.Yellow);
-            }
-            else
-            {
-                e.Appearance.BackColor = Color.FromArgb(80, Color.LightGreen);
+                int exist = Convert.ToInt32(view.GetRowCellDisplayText(e.RowHandle, view.Columns["Almacen"]));
+                int verificar = Convert.ToInt32(Conexion.GDatos.TraerValorEscalar("VerificarExMin", view.GetRowCellDisplayText(e.RowHandle, view.Columns["Codigo"])));
 
+                if (exist == 0)
+                {
+                    e.Appearance.BackColor = Color.FromArgb(80, Color.LightSalmon);
+
+                }
+                else if (exist <= verificar)
+                {
+                    e.Appearance.BackColor = Color.FromArgb(80, Color.Yellow);
+                }
+                else
+                {
+                    e.Appearance.BackColor = Color.FromArgb(80, Color.LightGreen);
+
+                }
             }
+            
         }
 
         private void FrmInventario_Load(object sender, EventArgs e)
@@ -271,6 +280,11 @@ namespace Tilapia
 
 
             
+
+        }
+
+        private void navBarItem1_LinkPressed(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
 
         }
     }

@@ -15,75 +15,101 @@ namespace Tilapia
 {
     public partial class Principal : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        public delegate void Midelegado();
         public Principal()
         {
             InitializeComponent();
             Conexion.IniciarSesion(".", "Tilapia", "sa", "12345");
-            mostrarProductosaVencerse();
+            DataTable DetalleBodega = Conexion.GDatos.TraerDataTableSql("Select * from TblDetalleBodega");
+                if (DetalleBodega.Rows.Count!= 0)
+	        {
+		     mostrarProductosaVencerse();
             mostrarProductosVencidos();
-
-
+	        }
 
         }
 
 
         public void mostrarProductosaVencerse()
         {
-            DataTable dt = Conexion.GDatos.TraerDataTableSql("mostrarProductoaVencer");
-            string PV = string.Format("Productos a vencerse: " + "\n\r");
-
-            if (dt.Rows.Count!= 0)
+                DataTable dt = Conexion.GDatos.TraerDataTableSql("mostrarProductoaVencer");
+            try
             {
-                for (int i = 0; i < dt.Rows.Count; i++)
+                if (dt !=null )
                 {
 
-                    PV += string.Format(dt.Rows[i][0].ToString() + " " + dt.Rows[i][1].ToString() + " " + "con existencia" + " " + dt.Rows[i][3].ToString() + "\n\r");
+                    string PV = string.Format("Productos a vencerse: " + "\n\r");
+
+                    if (dt.Rows.Count != 0)
+                    {
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+
+                            PV += string.Format(dt.Rows[i][0].ToString() + " " + dt.Rows[i][1].ToString() + " " + "con existencia" + " " + dt.Rows[i][3].ToString() + "\n\r");
 
 
+                        }
+                        MessageBox.Show("Los " + PV, "Tilapia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
-                MessageBox.Show("Los " + PV, "Tilapia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
+           
 
            
         }
         public void mostrarProductosVencidos()
         {
             DataTable dt = Conexion.GDatos.TraerDataTableSql("mostrarProductoVencidos");
-            string PV = string.Format("Productos Vencidos: " + "\n\r");
-            string mensaje = "Desea Sacar estos Productos de la Base de datos" + "\n\r" + "Verifique la Bodega";
-
-            if (dt.Rows.Count != 0)
+            if (dt!=null)
             {
+                string PV = string.Format("Productos Vencidos: " + "\n\r");
+                string mensaje = "Desea Sacar estos Productos de la Base de datos" + "\n\r" + "Verifique la Bodega";
 
-                for (int i = 0; i < dt.Rows.Count; i++)
+                if (dt.Rows.Count != 0)
                 {
 
-                    PV += string.Format(dt.Rows[i][0].ToString() + " " + dt.Rows[i][1].ToString() + " " + "con existencia" + " " + dt.Rows[i][3].ToString() + "\n\r");
-
-
-                }
-
-                if (MessageBox.Show("Los " + PV + "\n\r" + mensaje, "Tilapia", MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                {
-
-                    Invntario inv = new Invntario();
-
-                    for (int j = 0; j < dt.Rows.Count; j++)
+                    for (int i = 0; i < dt.Rows.Count; i++)
                     {
 
-                        inv.vencimiento = DateTime.Now.ToShortDateString();
-                        inv.exist = Convert.ToInt32(dt.Rows[j][3].ToString());
-                        inv.idSalida = Convert.ToInt32(inv.insertarSalida(inv));
-                        inv.idBodga = Convert.ToInt32( dt.Rows[j][5].ToString() );
+                        PV += string.Format(dt.Rows[i][0].ToString() + " " + dt.Rows[i][1].ToString() + " " + "con existencia" + " " + dt.Rows[i][3].ToString() + "\n\r");
 
-                       inv.actualizarSalida(inv);
 
-                        
                     }
-                }
 
-                   
+                    if (MessageBox.Show("Los " + PV + "\n\r" + mensaje, "Tilapia", MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    {
+
+                        Invntario inv = new Invntario();
+
+                        for (int j = 0; j < dt.Rows.Count; j++)
+                        {
+
+                            inv.vencimiento = DateTime.Now.ToShortDateString();
+                            inv.exist = Convert.ToInt32(dt.Rows[j][3].ToString());
+                            inv.idSalida = Convert.ToInt32(inv.insertarSalida(inv));
+                            inv.idBodga = Convert.ToInt32(dt.Rows[j][5].ToString());
+
+                            inv.actualizarSalida(inv);
+
+
+                        }
+                    }
+
+
+                }
             }
+            
+            
+            
+            
+            
+           
         }
 
         private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
@@ -130,6 +156,19 @@ namespace Tilapia
         {
             FrmCliente frm = new FrmCliente();
             frm.ShowDialog();
+            Form existe = Application.OpenForms.OfType<Form>().Where(pre => pre.Name == "FrmPedido").SingleOrDefault<Form>();
+
+
+            //if (existe != null)
+            //{
+                
+            //    Midelegado deleg = new Midelegado(Capanegocio.Orm.Cliente.Cargar);
+            //   // FrmPedido.
+            //    //deleg();
+
+            //}
+
+
         }
     }
 }

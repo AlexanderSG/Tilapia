@@ -173,6 +173,10 @@ namespace Tilapia
             cmbPresent.DisplayMember = "Empaque";
             cmbPresent.ValueMember = "idPresentacion";
         }
+
+
+        #region tooltip
+        // ventana que aparece al poner el curso en un elemento especifico
         public void tooltip()
         {
             ToolTip tt = new ToolTip();
@@ -186,6 +190,7 @@ namespace Tilapia
             tt.SetToolTip(this.gridControl1, "Click sobre el elemento a Editar");
             tt.SetToolTip(this.cmbPresent, "Seleccionar Empaque");
         }
+        #endregion
 
         public void Limpiar()
         {
@@ -538,6 +543,19 @@ namespace Tilapia
         private void btnImprimir_Click(object sender, EventArgs e)
         {
             imprimir();
+        }
+
+        private void FrmProduct_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Form existe = Application.OpenForms.OfType<Form>().Where(pre => pre.Name == "FrmPedido").SingleOrDefault<Form>();
+
+            if (existe != null)
+            {
+                // existe.BringToFront();
+                FrmPedido frm = new FrmPedido();
+                frm.DialogResult = DialogResult.OK;
+            }
+           
         }
     }
         }

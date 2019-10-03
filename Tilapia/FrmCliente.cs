@@ -16,6 +16,8 @@ namespace Tilapia
     public partial class FrmCliente : Form
     {
         Capanegocio.Orm.Cliente client = new Capanegocio.Orm.Cliente();
+        public delegate void Midelegado();
+
         bool bandera;
 
         public FrmCliente()
@@ -158,6 +160,11 @@ namespace Tilapia
         private void gridControl1_Click(object sender, EventArgs e)
         {
             barButtonItem5.Enabled = true;
+        }
+
+        private void FrmCliente_FormClosing(object sender, FormClosingEventArgs e)
+        {
+           
         }
     }
     
