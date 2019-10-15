@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Tilapia" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=Tilapia;Integrated Security=True" SettingsObjectName="Tilapia.Properties.Settings" SettingsPropertyName="TilapiaConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.TblProducto" Member="TblProducto">
+    <Type Name="TblProducto">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CodBarra" Type="System.String" DbType="NVarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreProd" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NombreCientifico" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Imagen" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="idPresentacion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExMinima" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

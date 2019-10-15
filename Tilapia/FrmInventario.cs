@@ -49,6 +49,8 @@ namespace Tilapia
 
         private void navBarItem1_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
+
+            CapaNegocio.DatosTemporales.caracter = gridView1.GetFocusedRowCellValue("Codigo").ToString();
             Inventario frm = new Inventario();
             frm.ShowDialog();
            gridControl1.DataSource = Conexion.GDatos.TraerDataTable("mostrarProductoXExist"); 
@@ -286,6 +288,35 @@ namespace Tilapia
         private void navBarItem1_LinkPressed(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
 
+        }
+
+        private void toggleSwitch1_Toggled(object sender, EventArgs e)
+        {
+            if (toggleSwitch1.IsOn)
+            {
+                textEdit1.Text = "";
+            }
+            else
+            {
+                textEdit1.Text = "";
+            }
+        }
+
+        private void textEdit1_EditValueChanged(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void textEdit1_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textEdit1.Text) && ( toggleSwitch1.IsOn ))
+            {
+                gridControl1.DataSource = Conexion.GDatos.TraerDataTable("mostrarProductoXFiltro", textEdit1.Text);
+            }
+            else if (!string.IsNullOrEmpty(textEdit1.Text) && ( toggleSwitch1.IsOn==false ))
+            {
+                gridControl1.DataSource = Conexion.GDatos.TraerDataTable("mostrarProductoXFiltroCodigo", textEdit1.Text);
+            }
         }
     }
 }

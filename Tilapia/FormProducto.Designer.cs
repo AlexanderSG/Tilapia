@@ -1,6 +1,6 @@
 ﻿namespace Tilapia
 {
-    partial class FrmProduct
+    partial class FormProducto
     {
         /// <summary>
         /// Required designer variable.
@@ -13,7 +13,7 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && ( components != null ))
+            if (disposing && (components != null))
             {
                 components.Dispose();
             }
@@ -29,10 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmProduct));
-            this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProducto));
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
             this.navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
@@ -40,7 +37,7 @@
             this.navBarItem2 = new DevExpress.XtraNavBar.NavBarItem();
             this.btnlimpiar = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem5 = new DevExpress.XtraNavBar.NavBarItem();
-            this.navBarItem7 = new DevExpress.XtraNavBar.NavBarItem();
+            this.btnImportar = new DevExpress.XtraNavBar.NavBarItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.cmbPresent = new System.Windows.Forms.ComboBox();
@@ -57,6 +54,11 @@
             this.txtCientifico = new System.Windows.Forms.TextBox();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton6 = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -74,9 +76,9 @@
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -87,6 +89,9 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtmin.Properties)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -94,25 +99,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ribbonPage2
-            // 
-            this.ribbonPage2.Name = "ribbonPage2";
-            this.ribbonPage2.Text = "ribbonPage2";
-            // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Caption = "Agregar Nuevo Producto";
-            this.barButtonItem1.Id = 0;
-            this.barButtonItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
-            this.barButtonItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
-            this.barButtonItem1.Name = "barButtonItem1";
-            this.barButtonItem1.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            // 
-            // ribbonPage3
-            // 
-            this.ribbonPage3.Name = "ribbonPage3";
-            this.ribbonPage3.Text = "ribbonPage3";
             // 
             // navBarControl1
             // 
@@ -126,15 +112,14 @@
             this.navBarItem2,
             this.btnlimpiar,
             this.navBarItem5,
-            this.navBarItem7});
+            this.btnImportar});
             this.navBarControl1.Location = new System.Drawing.Point(0, 0);
             this.navBarControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 134;
-            this.navBarControl1.Size = new System.Drawing.Size(134, 527);
-            this.navBarControl1.TabIndex = 0;
+            this.navBarControl1.Size = new System.Drawing.Size(134, 525);
+            this.navBarControl1.TabIndex = 1;
             this.navBarControl1.Text = "navBarControl1";
-            this.navBarControl1.Click += new System.EventHandler(this.navBarControl1_Click);
             // 
             // navBarGroup1
             // 
@@ -147,7 +132,7 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem2),
             new DevExpress.XtraNavBar.NavBarItemLink(this.btnlimpiar),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem5),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem7)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.btnImportar)});
             this.navBarGroup1.Name = "navBarGroup1";
             // 
             // navBarItem1
@@ -179,7 +164,7 @@
             this.btnlimpiar.Enabled = false;
             this.btnlimpiar.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnlimpiar.LargeImage")));
             this.btnlimpiar.Name = "btnlimpiar";
-            this.btnlimpiar.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem3_LinkClicked);
+            this.btnlimpiar.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.btnlimpiar_LinkClicked);
             // 
             // navBarItem5
             // 
@@ -189,18 +174,17 @@
             this.navBarItem5.Name = "navBarItem5";
             this.navBarItem5.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem5_LinkClicked);
             // 
-            // navBarItem7
+            // btnImportar
             // 
-            this.navBarItem7.Caption = "Salir";
-            this.navBarItem7.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarItem7.LargeImage")));
-            this.navBarItem7.Name = "navBarItem7";
-            this.navBarItem7.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem7_LinkClicked);
+            this.btnImportar.Caption = "Importar de Excel";
+            this.btnImportar.LargeImage = global::Tilapia.Properties.Resources.article_32x32;
+            this.btnImportar.Name = "btnImportar";
+            this.btnImportar.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.btnImportar_LinkClicked);
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(134, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -210,10 +194,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.gridControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(1230, 527);
+            this.splitContainer1.Size = new System.Drawing.Size(1119, 525);
             this.splitContainer1.SplitterDistance = 635;
-            this.splitContainer1.SplitterWidth = 5;
-            this.splitContainer1.TabIndex = 1;
+            this.splitContainer1.TabIndex = 2;
             // 
             // groupControl1
             // 
@@ -229,14 +212,15 @@
             this.groupControl1.Controls.Add(this.txtCientifico);
             this.groupControl1.Controls.Add(this.labelControl3);
             this.groupControl1.Controls.Add(this.simpleButton3);
+            this.groupControl1.Controls.Add(this.groupBox3);
             this.groupControl1.Controls.Add(this.groupBox1);
             this.groupControl1.Controls.Add(this.labelControl2);
             this.groupControl1.Controls.Add(this.txtProducto);
-            this.groupControl1.Location = new System.Drawing.Point(15, 10);
+            this.groupControl1.Location = new System.Drawing.Point(14, 10);
             this.groupControl1.Margin = new System.Windows.Forms.Padding(1);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(610, 626);
-            this.groupControl1.TabIndex = 2;
+            this.groupControl1.TabIndex = 3;
             this.groupControl1.Text = "Datos";
             // 
             // cmbPresent
@@ -253,18 +237,18 @@
             // 
             this.groupBox2.Controls.Add(this.btnImprimir);
             this.groupBox2.Controls.Add(this.panel1);
-            this.groupBox2.Location = new System.Drawing.Point(290, 23);
+            this.groupBox2.Location = new System.Drawing.Point(240, 23);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(294, 228);
+            this.groupBox2.Size = new System.Drawing.Size(344, 228);
             this.groupBox2.TabIndex = 255;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Generar Codigo";
             // 
             // btnImprimir
             // 
-            this.btnImprimir.Location = new System.Drawing.Point(102, 187);
+            this.btnImprimir.Location = new System.Drawing.Point(139, 187);
             this.btnImprimir.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnImprimir.Name = "btnImprimir";
             this.btnImprimir.Size = new System.Drawing.Size(87, 28);
@@ -278,7 +262,7 @@
             this.panel1.Location = new System.Drawing.Point(7, 27);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(281, 152);
+            this.panel1.Size = new System.Drawing.Size(331, 152);
             this.panel1.TabIndex = 2;
             this.panel1.TabStop = false;
             // 
@@ -289,7 +273,7 @@
             this.txtCodBarra.Name = "txtCodBarra";
             this.txtCodBarra.Size = new System.Drawing.Size(187, 23);
             this.txtCodBarra.TabIndex = 254;
-            this.txtCodBarra.TextChanged += new System.EventHandler(this.txtCodBarra_TextChanged_1);
+            this.txtCodBarra.TextChanged += new System.EventHandler(this.txtCodBarra_TextChanged);
             // 
             // labelControl7
             // 
@@ -392,6 +376,65 @@
             this.simpleButton3.TabIndex = 249;
             this.simpleButton3.Text = "...";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.pictureBox3);
+            this.groupBox3.Controls.Add(this.pictureBox4);
+            this.groupBox3.Controls.Add(this.simpleButton5);
+            this.groupBox3.Controls.Add(this.simpleButton6);
+            this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.ForeColor = System.Drawing.Color.Black;
+            this.groupBox3.Location = new System.Drawing.Point(290, 256);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(1);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(1);
+            this.groupBox3.Size = new System.Drawing.Size(294, 238);
+            this.groupBox3.TabIndex = 245;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Foto";
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(89, 18);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(1);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(129, 157);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 3;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Location = new System.Drawing.Point(89, 18);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(1);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(129, 157);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 0;
+            this.pictureBox4.TabStop = false;
+            // 
+            // simpleButton5
+            // 
+            this.simpleButton5.Enabled = false;
+            this.simpleButton5.Location = new System.Drawing.Point(185, 183);
+            this.simpleButton5.Margin = new System.Windows.Forms.Padding(1);
+            this.simpleButton5.Name = "simpleButton5";
+            this.simpleButton5.Size = new System.Drawing.Size(72, 32);
+            this.simpleButton5.TabIndex = 2;
+            this.simpleButton5.Text = "Remover";
+            this.simpleButton5.Click += new System.EventHandler(this.simpleButton5_Click);
+            // 
+            // simpleButton6
+            // 
+            this.simpleButton6.Location = new System.Drawing.Point(34, 183);
+            this.simpleButton6.Margin = new System.Windows.Forms.Padding(1);
+            this.simpleButton6.Name = "simpleButton6";
+            this.simpleButton6.Size = new System.Drawing.Size(72, 32);
+            this.simpleButton6.TabIndex = 1;
+            this.simpleButton6.Text = "Agregar";
+            this.simpleButton6.Click += new System.EventHandler(this.simpleButton6_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.pictureBox2);
@@ -400,7 +443,7 @@
             this.groupBox1.Controls.Add(this.simpleButton1);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(290, 258);
+            this.groupBox1.Location = new System.Drawing.Point(290, 256);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(1);
@@ -439,7 +482,6 @@
             this.simpleButton2.Size = new System.Drawing.Size(72, 32);
             this.simpleButton2.TabIndex = 2;
             this.simpleButton2.Text = "Remover";
-            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // simpleButton1
             // 
@@ -449,7 +491,6 @@
             this.simpleButton1.Size = new System.Drawing.Size(72, 32);
             this.simpleButton1.TabIndex = 1;
             this.simpleButton1.Text = "Agregar";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // labelControl2
             // 
@@ -482,12 +523,11 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(1);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(590, 527);
-            this.gridControl1.TabIndex = 15;
+            this.gridControl1.Size = new System.Drawing.Size(480, 525);
+            this.gridControl1.TabIndex = 16;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             this.gridControl1.Click += new System.EventHandler(this.gridControl1_Click);
-            this.gridControl1.DoubleClick += new System.EventHandler(this.gridControl1_DoubleClick);
             // 
             // gridView1
             // 
@@ -581,20 +621,17 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // FrmProduct
+            // FormProducto
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1364, 527);
+            this.ClientSize = new System.Drawing.Size(1253, 525);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.navBarControl1);
-            this.FormBorderEffect = DevExpress.XtraEditors.FormBorderEffect.Shadow;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "FrmProduct";
-            this.Text = "FrmProduct";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmProduct_FormClosing);
-            this.Load += new System.EventHandler(this.FrmProduct_Load);
+            this.Name = "FormProducto";
+            this.Text = "FormProducto";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormProducto_FormClosing);
+            this.Load += new System.EventHandler(this.FormProducto_Load);
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -606,6 +643,9 @@
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtmin.Properties)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -617,14 +657,23 @@
         }
 
         #endregion
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage3;
+
         private DevExpress.XtraNavBar.NavBarControl navBarControl1;
         private DevExpress.XtraNavBar.NavBarGroup navBarGroup1;
         private DevExpress.XtraNavBar.NavBarItem navBarItem1;
+        private DevExpress.XtraNavBar.NavBarItem navBarItem4;
+        private DevExpress.XtraNavBar.NavBarItem navBarItem2;
+        private DevExpress.XtraNavBar.NavBarItem btnlimpiar;
+        private DevExpress.XtraNavBar.NavBarItem navBarItem5;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private DevExpress.XtraEditors.GroupControl groupControl1;
+        private System.Windows.Forms.ComboBox cmbPresent;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private DevExpress.XtraEditors.SimpleButton btnImprimir;
+        private System.Windows.Forms.PictureBox panel1;
+        private System.Windows.Forms.TextBox txtCodBarra;
+        private DevExpress.XtraEditors.LabelControl labelControl7;
+        private DevExpress.XtraEditors.SimpleButton simpleButton4;
         private System.Windows.Forms.TextBox txtid;
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.TextEdit txtmin;
@@ -632,6 +681,11 @@
         private System.Windows.Forms.TextBox txtCientifico;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.SimpleButton simpleButton3;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private DevExpress.XtraEditors.SimpleButton simpleButton5;
+        private DevExpress.XtraEditors.SimpleButton simpleButton6;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -645,24 +699,13 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraNavBar.NavBarItem navBarItem4;
-        private DevExpress.XtraNavBar.NavBarItem navBarItem2;
-        private DevExpress.XtraNavBar.NavBarItem btnlimpiar;
-        private DevExpress.XtraNavBar.NavBarItem navBarItem5;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton4;
-        private DevExpress.XtraEditors.LabelControl labelControl7;
-        private System.Windows.Forms.TextBox txtCodBarra;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private DevExpress.XtraNavBar.NavBarItem navBarItem7;
-        private System.Windows.Forms.PictureBox panel1;
-        private System.Windows.Forms.ToolTip toolTip1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
-        private DevExpress.XtraEditors.SimpleButton btnImprimir;
-        private System.Windows.Forms.ComboBox cmbPresent;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevExpress.XtraNavBar.NavBarItem btnImportar;
     }
 }

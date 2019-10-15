@@ -47,7 +47,7 @@ namespace CapaNegocio
         //}
         public void ActualizarExistencia(Pedidos ped)
         {
-            Conexion.GDatos.TraerValorEscalar("ActualizarExistencia", ped.idDetalle, ped.cantidad, ped.idSalida);
+            Conexion.GDatos.Ejecutar("ActualizarExistencia", ped.idDetalle, ped.cantidad);
         }
 
         public DataTable TraerDetalleParaActualizarSalida(Pedidos ped)

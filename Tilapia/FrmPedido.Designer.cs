@@ -54,6 +54,7 @@
             this.txtCodBarra = new System.Windows.Forms.TextBox();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
+            this.txtidProd = new System.Windows.Forms.TextBox();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.cmbProducto = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -78,7 +79,6 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.txtidProd = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -179,6 +179,7 @@
             this.navBarItem7.Caption = "Salir";
             this.navBarItem7.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarItem7.LargeImage")));
             this.navBarItem7.Name = "navBarItem7";
+            this.navBarItem7.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItem7_LinkClicked);
             // 
             // splitContainer1
             // 
@@ -395,6 +396,14 @@
             this.simpleButton3.Size = new System.Drawing.Size(47, 22);
             this.simpleButton3.TabIndex = 280;
             this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
+            // 
+            // txtidProd
+            // 
+            this.txtidProd.Location = new System.Drawing.Point(169, 12);
+            this.txtidProd.Name = "txtidProd";
+            this.txtidProd.Size = new System.Drawing.Size(44, 22);
+            this.txtidProd.TabIndex = 277;
+            this.txtidProd.Visible = false;
             // 
             // simpleButton2
             // 
@@ -632,13 +641,6 @@
             // 
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // txtidProd
-            // 
-            this.txtidProd.Location = new System.Drawing.Point(169, 12);
-            this.txtidProd.Name = "txtidProd";
-            this.txtidProd.Size = new System.Drawing.Size(44, 22);
-            this.txtidProd.TabIndex = 277;
             // 
             // FrmPedido
             // 

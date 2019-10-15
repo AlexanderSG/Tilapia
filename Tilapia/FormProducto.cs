@@ -13,40 +13,32 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BarcodeLib;
 using System.Drawing.Printing;
+using System.Data.OleDb;
 
 namespace Tilapia
 {
-    public partial class FrmProduct : DevExpress.XtraEditors.XtraForm
+    public partial class FormProducto : Form
     {
         Presentacion pres = new Presentacion();
         Producto prod = new Producto();
-     
         bool a = false;
         bool save;
         bool edit;
         private long m_lImageFileLength = 0;
         private byte[] m_barrImg;
-        public FrmProduct()
+
+        public FormProducto()
         {
             InitializeComponent();
         }
 
-        private void FrmProduct_Load(object sender, EventArgs e)
-        {
-            inhabilitar();
-            tooltip();
-            gridControl1.DataSource = prod.MostrarProd();
-            
-           
-
-        }
-        private static FrmProduct m_FormDefInstance;
-        public static FrmProduct DefInstance
+        private static FormProducto m_FormDefInstance;
+        public static FormProducto DefInstance
         {
             get
             {
                 if (m_FormDefInstance == null || m_FormDefInstance.IsDisposed)
-                    m_FormDefInstance = new FrmProduct();
+                    m_FormDefInstance = new FormProducto();
                 return m_FormDefInstance;
             }
             set
@@ -55,7 +47,6 @@ namespace Tilapia
             }
         }
 
-        
         public void inhabilitar()
         {
             txtCodBarra.Enabled = false;
@@ -194,7 +185,7 @@ namespace Tilapia
 
         public void Limpiar()
         {
-                      
+
             txtCientifico.Text = "";
             txtProducto.Text = "";
             cmbPresent.Text = "";
@@ -206,24 +197,18 @@ namespace Tilapia
             txtProducto.Focus();
             panel1.Image = null;
         }
-
-        private void navBarControl1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         public string generarCodigo()
         {
-            string codigo="";
+            string codigo = "";
             int total;
             try
             {
                 total = prod.Generar();
-                if (total<10)
+                if (total < 10)
                 {
                     codigo = "NT505000" + total.ToString();
                 }
-                else if (total<100)
+                else if (total < 100)
                 {
                     codigo = "NT50500" + total.ToString();
                 }
@@ -231,15 +216,61 @@ namespace Tilapia
                 {
                     codigo = "NT5050" + total.ToString();
                 }
-               
-                
-           
+
+
+
                 return codigo;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al generar el codigo: ",ex.ToString());
-                throw ;
+                MessageBox.Show("Error al generar el codigo: ", ex.ToString());
+                throw;
+            }
+        }
+
+        public void imprimir()
+        {
+            PrintDialog pd = new PrintDialog();
+            PrintDocument doc = new PrintDocument();
+            doc.PrintPage += Doc_PrintPage;
+            pd.Document = doc;
+
+            if (pd.ShowDialog() == DialogResult.OK)
+            {
+                doc.Print();
+            }
+        }
+        private void Doc_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            Bitmap bit = new Bitmap(panel1.Width, panel1.Height);
+            panel1.DrawToBitmap(bit, new Rectangle(0, 0, panel1.Width, panel1.Height));
+            e.Graphics.DrawImage(bit, 0, 0);
+            bit.Dispose();
+        }
+        public void guardar()
+        {
+            prod.idProducto = Convert.ToInt32(txtid.Text);
+            prod.codBarra = txtCodBarra.Text;
+            prod.nombreProducto = txtProducto.Text;
+            prod.nombreCientifico = txtCientifico.Text;
+            prod.Imagen = m_barrImg;
+            prod.idPresentacion = Convert.ToInt32(cmbPresent.SelectedValue.ToString());
+            prod.exmin = Convert.ToInt32(txtmin.Text);
+            prod.CrearProducto(prod);
+
+        }
+        public void eliminarProducto()
+        {
+            int id = Convert.ToInt32(gridView1.GetFocusedRowCellValue("id"));
+            string cod = gridView1.GetFocusedRowCellValue("CodBarra").ToString();
+            string Prod = gridView1.GetFocusedRowCellValue("NombreProd").ToString();
+
+
+            if (MessageBox.Show("¿Deseas eliminar el Producto" + "  " + cod + "  " + Prod + "?", "Tilapia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Conexion.GDatos.Ejecutar("EliminarProducto", id);
+                gridControl1.DataSource = prod.MostrarProd();
+
             }
         }
 
@@ -255,12 +286,12 @@ namespace Tilapia
             navBarItem1.Enabled = false;
         }
 
-        private void simpleButton1_Click(object sender, EventArgs e)
+        private void simpleButton6_Click(object sender, EventArgs e)
         {
             LoadImage();
         }
 
-        private void simpleButton2_Click(object sender, EventArgs e)
+        private void simpleButton5_Click(object sender, EventArgs e)
         {
             m_barrImg = null;
             pictureBox1.Image = null;
@@ -295,9 +326,9 @@ namespace Tilapia
                         edit = false;
                         navBarItem5.Enabled = false;
 
-                       
+
                     }
-                  
+
                 }
                 else if (edit)
                 {
@@ -312,35 +343,9 @@ namespace Tilapia
                     btnImprimir.Visible = false;
                 }
 
-                
-                
+
+
             }
-            
-        }
-
-        public void imprimir()
-        {
-            PrintDialog pd = new PrintDialog();
-            PrintDocument doc = new PrintDocument();
-            doc.PrintPage += Doc_PrintPage;
-            pd.Document = doc;
-
-            if (pd.ShowDialog() == DialogResult.OK)
-            {
-                doc.Print();
-            }
-        }
-        public void guardar()
-        {
-            prod.idProducto = Convert.ToInt32(txtid.Text);
-            prod.codBarra = txtCodBarra.Text;
-            prod.nombreProducto = txtProducto.Text;
-            prod.nombreCientifico = txtCientifico.Text;
-            prod.Imagen = m_barrImg;
-            prod.idPresentacion = Convert.ToInt32(cmbPresent.SelectedValue.ToString());
-            prod.exmin = Convert.ToInt32(txtmin.Text);
-            prod.CrearProducto(prod);
-
         }
 
         private void navBarItem2_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -365,7 +370,7 @@ namespace Tilapia
                         this.Close();
 
                     }
-                   
+
                 }
                 else if (edit)
                 {
@@ -373,17 +378,14 @@ namespace Tilapia
                     this.Close();
                 }
 
-              
+
             }
         }
 
-        private void navBarItem3_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        private void btnlimpiar_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-
             Limpiar();
         }
-
-    
 
         private void simpleButton4_Click(object sender, EventArgs e)
         {
@@ -394,23 +396,14 @@ namespace Tilapia
 
         private void txtCodBarra_TextChanged(object sender, EventArgs e)
         {
-           
-                prod.codBarra = txtCodBarra.Text;
-                var b = prod.VerificarProd(prod);
-                if (b == 1)
-                {
-                    MessageBox.Show("Ya existe producto con este Codigo de Barra", "Tilapia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtCodBarra.Text = "";
-                    txtCodBarra.Focus();
-                }
-           
-            }
-
-        private void btnbarra_Click(object sender, EventArgs e)
-        {
-           
-
-    
+            //prod.codBarra = txtCodBarra.Text;
+            //var b = prod.VerificarProd(prod);
+            //if (b == 1)
+            //{
+            //    MessageBox.Show("Ya existe producto con este Codigo de Barra", "Tilapia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    txtCodBarra.Text = "";
+            //    txtCodBarra.Focus();
+            //}
         }
 
         private void navBarItem7_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
@@ -418,38 +411,21 @@ namespace Tilapia
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void Doc_PrintPage(object sender, PrintPageEventArgs e)
-        {
-            Bitmap bit = new Bitmap(panel1.Width,panel1.Height);
-            panel1.DrawToBitmap(bit, new Rectangle(0, 0, panel1.Width, panel1.Height));
-            e.Graphics.DrawImage(bit, 0, 0);
-            bit.Dispose();
-        }
-
-        private void txtCodBarra_TextChanged_1(object sender, EventArgs e)
-        {
-          
-        }
-
         private void txtProducto_TextChanged(object sender, EventArgs e)
         {
-            
             if (!string.IsNullOrEmpty(txtProducto.Text))
             {
                 errorProvider1.Clear();
+                //codigo que genera la libreria del codigo de barra
                 BarcodeLib.Barcode codigo = new BarcodeLib.Barcode();
                 codigo.AlternateLabel = txtProducto.Text;
                 codigo.IncludeLabel = true;
-                panel1.Image = codigo.Encode(BarcodeLib.TYPE.CODE128, txtCodBarra.Text, Color.Black, Color.White, 240, 135);
-               
+                panel1.Image = codigo.Encode(BarcodeLib.TYPE.CODE128, txtCodBarra.Text, Color.Black, Color.White, 320, 150);
+
 
                 if (panel1.Image != null)
                 {
+                    //codigo que añade el texto del textbox CodBarra a la imagen
                     var COD = txtCodBarra.Text;
 
                     Brush mybrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
@@ -458,50 +434,20 @@ namespace Tilapia
                     Graphics DIBUJO = Graphics.FromImage(BM);
                     DIBUJO.TranslateTransform(30, 20);
                     DIBUJO.RotateTransform(-90);
-                    DIBUJO.DrawString(COD, myfont, mybrush, -70,12);
-                    this.panel1.Image = BM;                    
-                   
-                    
+                    DIBUJO.DrawString(COD, myfont, mybrush, -70, -15);
+                    this.panel1.Image = BM;
+
+
                 }
 
 
             }
         }
 
-        private void verticalText(object sender, PaintEventArgs e)
-        {
-           
-       
-            
-        }
-
-        private void label1_Paint(object sender, PaintEventArgs e)
-        {
-           
-           
-
-        }
-
-        private void label1_Paint_1(object sender, PaintEventArgs e)
-        {            
-              
-            
-        }
-
-        private void gridControl1_DoubleClick(object sender, EventArgs e)
-        {
-           
-        }
-
         private void gridControl1_Click(object sender, EventArgs e)
         {
-
             navBarItem5.Enabled = true;
-            }
-
-
-           
-        
+        }
 
         private void navBarItem5_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
@@ -513,31 +459,11 @@ namespace Tilapia
             txtProducto.Text = Convert.ToString(gridView1.GetFocusedRowCellValue("NombreProd"));
             txtCientifico.Text = Convert.ToString(gridView1.GetFocusedRowCellValue("NombreCientifico"));
             cargarPresentacion();
-            cmbPresent.Text= Convert.ToString(gridView1.GetFocusedRowCellValue("Empaque"));
-            txtmin.Text= Convert.ToString(gridView1.GetFocusedRowCellValue("ExMinima"));
+            cmbPresent.Text = Convert.ToString(gridView1.GetFocusedRowCellValue("Empaque"));
+            txtmin.Text = Convert.ToString(gridView1.GetFocusedRowCellValue("ExMinima"));
             btnImprimir.Visible = true;
             btnlimpiar.Enabled = false;
             navBarItem1.Enabled = false;
-            
-
-        }
-
-        private void navBarItem6_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
-        {
-            int id = Convert.ToInt32(gridView1.GetFocusedRowCellValue("id"));
-            string cod = gridView1.GetFocusedRowCellValue("CodBarra").ToString();
-            string Prod = gridView1.GetFocusedRowCellValue("NombreProd").ToString();
-
-
-            if (MessageBox.Show( "¿Deseas eliminar el Producto" +"  "+ cod +"  "+ Prod + "?", "Tilapia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                Conexion.GDatos.Ejecutar("EliminarProducto", id);
-                gridControl1.DataSource = prod.MostrarProd();
-
-            }
-            
-            
-            
         }
 
         private void btnImprimir_Click(object sender, EventArgs e)
@@ -545,7 +471,7 @@ namespace Tilapia
             imprimir();
         }
 
-        private void FrmProduct_FormClosing(object sender, FormClosingEventArgs e)
+        private void FormProducto_FormClosing(object sender, FormClosingEventArgs e)
         {
             Form existe = Application.OpenForms.OfType<Form>().Where(pre => pre.Name == "FrmPedido").SingleOrDefault<Form>();
 
@@ -555,9 +481,92 @@ namespace Tilapia
                 FrmPedido frm = new FrmPedido();
                 frm.DialogResult = DialogResult.OK;
             }
-           
+        }
+
+        private void FormProducto_Load(object sender, EventArgs e)
+        {
+            inhabilitar();
+            tooltip();
+            gridControl1.DataSource = prod.MostrarProd();
+        }
+
+        private void btnImportar_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            OpenFileDialog cargarArchivoExcel = new OpenFileDialog();
+            if (cargarArchivoExcel.ShowDialog() == DialogResult.OK)
+            {
+                var extensionesPermitidas = new String[] { ".xls", ".xlsx" };
+                var fileExtension = System.IO.Path.GetExtension(cargarArchivoExcel.FileName).ToLower();
+                if (extensionesPermitidas.Contains(fileExtension))
+                {
+
+                    #region conexion a excel 
+                    string str = cargarArchivoExcel.FileName,
+                            connectionString = $@"provider = Microsoft.ACE.OLEDB.12.0; 
+                            data source = {str}; 
+                            Extended Properties = 'Excel 12.0'";
+                    OleDbConnection conector = new OleDbConnection(connectionString);
+                    conector.Open();
+                    OleDbCommand consulta = default(OleDbCommand);
+                    consulta = new OleDbCommand("Select * from [Hoja1$]", conector);
+                    OleDbDataAdapter adaptador = new OleDbDataAdapter();
+                    adaptador.SelectCommand = consulta;
+
+                    DataSet ds = new DataSet();
+                    adaptador.Fill(ds);
+
+                    DataTable dt = ds.Tables[0];
+                    #endregion
+                    if (dt.Rows.Count > 1)
+                    {
+
+                        #region Ciclo para verificar/agregar todos los tipos de presentacion
+                        for (int k = 0; k < dt.Rows.Count; k++)
+                        {
+                            pres.nombrePresentacion = dt.Rows[k][1].ToString();
+                            DataTable VPRES = Conexion.GDatos.TraerDataTable("VerificarPresentacion", pres.nombrePresentacion);
+                            bool verif = Convert.ToBoolean(VPRES.Rows[0][0]);
+                            if (!verif)
+                            {
+                                //int idpres = Conexion.GDatos.EjecutarSql($"select idPresentacion from TblPresentacion where Empaque={pres.nombrePresentacion}");
+                                // Conexion.GDatos.Ejecutar("InsertarProd", -1, codigo, pres.nombrePresentacion, null, null, idpres, 0);
+                                Conexion.GDatos.Ejecutar("insertarPresentacion", -1, pres.nombrePresentacion);
+                            }
+
+                        }
+
+                        #endregion
+
+                        
+                        for (int M = 0; M < dt.Rows.Count; M++)
+                        {
+                            string nombreProd = dt.Rows[M][0].ToString();
+                            string nombrePres= dt.Rows[M][1].ToString();
+                            string codigo = generarCodigo();
+
+                            //DataTable VPROD = Conexion.GDatos.TraerDataTable("VerificarProdXNombre", nombreProd);
+                            //bool verifProd = Convert.ToBoolean(VPROD.Rows[0][0]);
+                           DataTable traerId= Conexion.GDatos.TraerDataTable("TraerPresentacion" ,nombrePres);
+                            int idpres = Convert.ToInt32(traerId.Rows[0][0]);
+                            Conexion.GDatos.Ejecutar("InsertarProd", -1, codigo, nombreProd, null, null, idpres, 0);
+                               
+                            }
+
+                        }
+                    gridControl1.DataSource = prod.MostrarProd();
+                    }
+
+                else
+                {
+                    MessageBox.Show("Cargue un archivo de Excel", "Nicalapia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+               
+
+
+
+          
         }
     }
-        }
-
-
+}

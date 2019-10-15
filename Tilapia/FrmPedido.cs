@@ -17,13 +17,14 @@ namespace Tilapia
     {
         Pedidos ped = new Pedidos();
         Capanegocio.Orm.Cliente client = new Capanegocio.Orm.Cliente();
-        FrmProduct frm = new FrmProduct();
+        FormProducto frm = new FormProducto();
         Producto prod = new Producto();
         bool exis;
         bool verif;
         bool valid;
         bool nuevo;
         bool edit;
+        int h=0;
         public FrmPedido()
         {
             InitializeComponent();
@@ -531,14 +532,17 @@ namespace Tilapia
             validaciones();
             if (valid==true)
             {
+                //obtenemos los datos del pedido 
                 ped.Fecha_Solic = textBox2.Text;
                 ped.Fecha_Entrega =dateEdit2.Text;
                 ped.idCliente = Convert.ToInt32(cmbCliente.Text);
                 ped.Notas = textBox3.Text;
-                int a= ped.GuardarPedido(ped),
-                    h=0;
+                //guardamos el pedido y retornamos el idPedido para ingresarlos al detalle y asi enlazar 
+                //dichos detalles al pedido
+                int a = ped.GuardarPedido(ped);
+                    
                    
-
+                // ciclo que revisa cuanto datos DETALLES estan en la grilla
                 for (int i = 0; i < gridView1.RowCount; i++)
                 {
 
@@ -546,79 +550,57 @@ namespace Tilapia
                     ped.idProd = Convert.ToInt32(gridView1.GetRowCellValue(i, "id"));
                     ped.cantidad= Convert.ToInt32(gridView1.GetRowCellValue(i, "Cantidad"));
                     ped.GuardarDetallePedido(ped);
+
+
+                    #region Sacar Productos proximo a vencerse
+                    //SP que obtendra productos que esten mas proximo a la fecha de vencimiento
+                    //ayudando asi a optimizar que no se pierda dichos productos en bodega
                     DataTable dt = Conexion.GDatos.TraerDataTable("TraerProductoProximoVencimiento", ped.idProd);
+
+                    //ciclo que chequea si traer muchos productos del mismo codigo de barra
 
                     for (int f = 0; f < dt.Rows.Count; f++)
                     {
+                        
                         int cantidadBodega = Convert.ToInt32(dt.Rows[f][4]);
                         DataTable Detalle = ped.TraerDetalleParaActualizarSalida(ped);
                         ped.idDetalle = Convert.ToInt32(Detalle.Rows[f][0]);
 
                         if (cantidadBodega < ped.cantidad)
                         {
-                            h += cantidadBodega;
+                            // h es la variable que obtendra sumatoria de las cantidades de varios productos si no concuerdan con 
+                            // la cantidad solicitad en el pedido
+
+                            h += cantidadBodega; 
                             if (h< ped.cantidad)
                             {
-                               
+                               // sacamos los productos que no concuerden con la cantidad solicitada
+                               //es decir le damos Salida
                                 Conexion.GDatos.Ejecutar("ActualizarEstadoPedido", ped.idDetalle);
                                 Conexion.GDatos.Ejecutar("insertarPedidosSalida", ped.idDetalle, ped.Fecha_Solic, cantidadBodega);
-
-                               
+                                                               
                             }
                             else
                             {
-                                return;
+                                    int sumaTotal = h - ped.cantidad,
+                                     L = ped.cantidad - cantidadBodega;
+                                Conexion.GDatos.Ejecutar("insertarPedidosSalida", ped.idDetalle, ped.Fecha_Solic, L);
+                                Conexion.GDatos.Ejecutar("ActualizarExistencia", ped.idDetalle, sumaTotal);
                             }
-
-                        
-
+                            
                         }
                         else
                         {
-
-                            //DataTable dt2 = Conexion.GDatos.TraerDataTable("TraerProductoPedido", ped.idProd);
-                            //int cantTotal = Convert.ToInt32(dt2.Rows[0][4]),
-                            //    sumaTotal = cantTotal - sumaCiclo ;
-                                              
-
-                            //ped.cantidad = sumaTotal;
-
-                           
-                            
-
-
-
-
-
-
-
-
-
-                            // int cantidadAlmacen = Convert.ToInt32(dt.Rows[0][4]),
-                            //  total = cantidadAlmacen - ped.cantidad;
-                            //ped.idDetalle = ped.TraerDetalleParaActualizarSalida(ped);
-                            // ped.idSalida = ped.SalidaBodegaXPedido(ped);
-
-                            // ped.ActualizarSalidaPedido2(ped);
+                            int sumaTotal = cantidadBodega - ped.cantidad;
+                            Conexion.GDatos.Ejecutar("insertarPedidosSalida", ped.idDetalle, ped.Fecha_Solic, ped.cantidad);
+                            Conexion.GDatos.Ejecutar("ActualizarExistencia", ped.idDetalle, sumaTotal);
+                                                      
                         }
-                        //int existencia = Convert.ToInt32(dt.Rows[0][4]);
-                        //int nuevaExistencia = existencia - ped.cantidad;
-
-
                     }
-
-
-
-
-
-
-
-
+                    #endregion
                 }
 
                 limpiar();
-
-
 
             }
         }
@@ -641,8 +623,52 @@ namespace Tilapia
                     ped.idProd = Convert.ToInt32(gridView1.GetRowCellValue(i, "id"));
                     ped.cantidad = Convert.ToInt32(gridView1.GetRowCellValue(i, "Cantidad"));
                     ped.GuardarDetallePedido(ped);
-                    //ped.idSalida = ped.SalidaBodegaXPedido(ped);
-                    //ped.ActualizarSalidaPedido(ped);
+                    #region Sacar Productos proximo a vencerse
+                    //SP que obtendra productos que esten mas proximo a la fecha de vencimiento
+                    //ayudando asi a optimizar que no se pierda dichos productos en bodega
+                    DataTable dt = Conexion.GDatos.TraerDataTable("TraerProductoProximoVencimiento", ped.idProd);
+
+                    //ciclo que chequea si traer muchos productos del mismo codigo de barra
+
+                    for (int f = 0; f < dt.Rows.Count; f++)
+                    {
+
+                        int cantidadBodega = Convert.ToInt32(dt.Rows[f][4]);
+                        DataTable Detalle = ped.TraerDetalleParaActualizarSalida(ped);
+                        ped.idDetalle = Convert.ToInt32(Detalle.Rows[f][0]);
+
+                        if (cantidadBodega < ped.cantidad)
+                        {
+                            // h es la variable que obtendra sumatoria de las cantidades de varios productos si no concuerdan con 
+                            // la cantidad solicitad en el pedido
+
+                            h += cantidadBodega;
+                            if (h < ped.cantidad)
+                            {
+                                // sacamos los productos que no concuerden con la cantidad solicitada
+                                //es decir le damos Salida
+                                Conexion.GDatos.Ejecutar("ActualizarEstadoPedido", ped.idDetalle);
+                                Conexion.GDatos.Ejecutar("insertarPedidosSalida", ped.idDetalle, ped.Fecha_Solic, cantidadBodega);
+
+                            }
+                            else
+                            {
+                                int sumaTotal = h - ped.cantidad,
+                                 L = ped.cantidad - cantidadBodega;
+                                Conexion.GDatos.Ejecutar("insertarPedidosSalida", ped.idDetalle, ped.Fecha_Solic, L);
+                                Conexion.GDatos.Ejecutar("ActualizarExistencia", ped.idDetalle, sumaTotal);
+                            }
+
+                        }
+                        else
+                        {
+                            int sumaTotal = cantidadBodega - ped.cantidad;
+                            Conexion.GDatos.Ejecutar("insertarPedidosSalida", ped.idDetalle, ped.Fecha_Solic, ped.cantidad);
+                            Conexion.GDatos.Ejecutar("ActualizarExistencia", ped.idDetalle, sumaTotal);
+
+                        }
+                    }
+                    #endregion
 
 
                 }
@@ -724,6 +750,11 @@ namespace Tilapia
         private void navBarItem6_LinkPressed(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
 
+        }
+
+        private void navBarItem7_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            this.Close();
         }
     }
 }

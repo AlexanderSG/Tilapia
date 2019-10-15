@@ -117,35 +117,51 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="save_32x321" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\save_32x321.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="simpleButton1.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
   </data>
-  <data name="saveall_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\saveall_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="saveall_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\saveall_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="save_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\save_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="save1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\save1.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v17.1, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
-  </data>
-  <data name="actions_clear" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\actions_clear.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v17.1, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
-  </data>
-  <data name="save_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\save_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="save_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\save_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="save" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\save.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v17.1, Version=17.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
-  </data>
-  <data name="article_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\article_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
+  <metadata name="documentViewerRibbonController1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

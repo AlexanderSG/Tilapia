@@ -126,8 +126,8 @@ namespace Tilapia
             }
             else
             {
-                FrmProduct.DefInstance.MdiParent = this;
-                FrmProduct.DefInstance.Show();
+                FormProducto.DefInstance.MdiParent = this;
+                FormProducto.DefInstance.Show();
             }
         }
 
@@ -169,6 +169,12 @@ namespace Tilapia
             //}
 
 
+        }
+
+        private void barButtonItem8_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Reportes.FormReporteEntradas.DefInstance.MdiParent = this;
+            Reportes.FormReporteEntradas.DefInstance.Show();
         }
     }
 }

@@ -22,5 +22,15 @@ namespace Tilapia.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=Tilapia;Integrated Security=True")]
+        public string TilapiaConnectionString {
+            get {
+                return ((string)(this["TilapiaConnectionString"]));
+            }
+        }
     }
 }

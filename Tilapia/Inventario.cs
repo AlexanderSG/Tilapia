@@ -21,6 +21,7 @@ namespace Tilapia
         {
             InitializeComponent();
             LlenaGridVacia();
+            txtCodBarra.Text = CapaNegocio.DatosTemporales.caracter;
             tooltip();
         }
 
@@ -62,6 +63,8 @@ namespace Tilapia
         }
         private void txtCodBarra_TextChanged_2(object sender, EventArgs e)
         {
+           
+
             prod.codBarra = txtCodBarra.Text;            
 
             if (!string.IsNullOrEmpty(txtCodBarra.Text)) 
@@ -84,6 +87,8 @@ namespace Tilapia
                             if (c == 1)
                             {
                                 txtalmacen.Text = Conexion.GDatos.TraerValorEscalar("TraerExistencia", txtid.Text).ToString();
+                                    
+                                //txtalmacen.Text = TE.Rows[0][0].ToString();
                             }
                             else
                             {
@@ -91,9 +96,9 @@ namespace Tilapia
                             }
                            
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
-                           
+                            throw ex;
 
                         }
                         
@@ -462,6 +467,16 @@ namespace Tilapia
         private void txtactualizar_KeyPress_2(object sender, KeyPressEventArgs e)
         {
 
+        }
+
+        private void dateEdit2_EditValueChanged(object sender, EventArgs e)
+        {
+            DateTime dt1 = dateEdit1.DateTime;
+            DateTime dt2 = dateEdit2.DateTime;
+            if (dt2 <= dt1)
+            {
+                dateEdit2.Text = "";
+            }
         }
     }
 

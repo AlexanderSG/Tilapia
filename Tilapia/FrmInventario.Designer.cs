@@ -161,6 +161,7 @@
             // 
             // toggleSwitch1
             // 
+            this.toggleSwitch1.EditValue = true;
             this.toggleSwitch1.Location = new System.Drawing.Point(461, 63);
             this.toggleSwitch1.Margin = new System.Windows.Forms.Padding(4);
             this.toggleSwitch1.Name = "toggleSwitch1";
@@ -168,6 +169,7 @@
             this.toggleSwitch1.Properties.OnText = "Producto";
             this.toggleSwitch1.Size = new System.Drawing.Size(144, 26);
             this.toggleSwitch1.TabIndex = 2;
+            this.toggleSwitch1.Toggled += new System.EventHandler(this.toggleSwitch1_Toggled);
             // 
             // textEdit1
             // 
@@ -176,6 +178,8 @@
             this.textEdit1.Name = "textEdit1";
             this.textEdit1.Size = new System.Drawing.Size(384, 22);
             this.textEdit1.TabIndex = 1;
+            this.textEdit1.EditValueChanged += new System.EventHandler(this.textEdit1_EditValueChanged);
+            this.textEdit1.TextChanged += new System.EventHandler(this.textEdit1_TextChanged);
             // 
             // labelControl1
             // 
